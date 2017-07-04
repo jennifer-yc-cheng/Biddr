@@ -25,6 +25,10 @@ class AuctionsController < ApplicationController
     @bid = Bid.new
   end
 
+  def bidded
+    @auctions = Auction.where(is_bidded: true)
+  end
+
   private
 
   def auction_params

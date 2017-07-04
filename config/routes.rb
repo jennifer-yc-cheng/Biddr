@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
 
   resources :auctions do
+    get '/bidded', to: 'auctions#bidded', on: :collection
     resources :bids, only: [:create]
   end
 end

@@ -5,6 +5,7 @@ class BidsController < ApplicationController
     @bid.user_id = current_user.id
     @bid.auction = @auction
     if @bid.save
+      @auction.update(is_bidded: true)
       redirect_to auction_path(@auction)
     else
       render 'auctions/show'
