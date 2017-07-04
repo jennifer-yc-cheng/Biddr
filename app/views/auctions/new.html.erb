@@ -1,0 +1,10 @@
+<%= simple_form_for @auction do |f| %>
+  <%= f.input :title %>
+  <%= label_tag 'Details' %>
+  <%= f.text_area :details, class: 'form-control' %>
+  <%= f.input :end_date, start_year: Date.today.year,
+                         end_year: Date.today.year + 10,
+                         order: [:month, :day, :year] %>
+  <%= f.input :reserve_price %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
