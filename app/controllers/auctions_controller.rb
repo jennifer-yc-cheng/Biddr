@@ -22,6 +22,7 @@ class AuctionsController < ApplicationController
   end
 
   def show
+    @bid = Bid.new
   end
 
   private

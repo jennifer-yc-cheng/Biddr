@@ -1,9 +1,33 @@
 <div class="col-xs-9">
   <h1><%= @auction.title %></h1>
   <p><%= @auction.details %></p>
+
+  <%= simple_form_for [@auction, @bid] do |f| %>
+    <%= f.input :price, :label => false, wrapper_html: {class: "form-inline"} do %>
+      <%= f.input :price, :label => false%>
+      <%= f.button :submit, "Bid", :class => "btn-primary" %>
+    <% end %>
+  <% end %>
+
+
+  <h3>Previous Bids</h3>
+  <% @auction.bids&.order(created_at: :desc).each do |bid| %>
+    <p>$<%= bid.price %> on
+        <%= bid.created_at.strftime('%b %d %Y') %> at
+        <%= bid.created_at.strftime('%H:%M:%S') %>
+        by <%= bid.user.full_name %></p>
+  <% end %>
 </div>
 
 <div class="col-xs-3">
-  <h3>current price: ___</h3>
-  <h3>reserved price not met</h3>
+  <% if @auction.bids.length > 0 %>
+    <h3>current price: $<%= @auction.bids.order(created_at: :desc).first.price %></h3>
+    <% if @auction.bids.order(created_at: :desc).first.price < @auction.reserve_price%>
+      <h3>reserved price not met</h3>
+    <% end %>
+  <% else %>
+    <h3>current price: - </h3>
+    <h3>reserved price not met</h3>
+  <% end %>
+
 </div>
