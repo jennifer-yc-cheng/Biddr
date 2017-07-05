@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_many :auctions
   has_many :bids
+  has_many :watches
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 

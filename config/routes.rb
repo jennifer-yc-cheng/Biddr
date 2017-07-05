@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
   resources :auctions do
     get '/bidded', to: 'auctions#bidded', on: :collection
+    get '/watched', to: 'auctions#watched', on: :collection
+    resources :publishings, only: :create
     resources :bids, only: [:create]
+    resources :watches, only: [:create, :destroy]
   end
 end

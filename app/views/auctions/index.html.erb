@@ -1,4 +1,5 @@
 <% @auctions&.each do |auction| %>
   <%= link_to auction.title, auction_path(auction) %>
+  <span>By: <%= auction.user.full_name %></span>
   <hr>
 <% end %>

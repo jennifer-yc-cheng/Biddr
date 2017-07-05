@@ -1,0 +1,5 @@
+<% @watches&.each do |watch| %>
+  <%= link_to watch.auction.title, auction_path(watch.auction) %>
+  <p>Status: <%= watch.auction.aasm_state %></p>
+  <hr>
+<% end %>

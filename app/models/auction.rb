@@ -1,6 +1,7 @@
 class Auction < ApplicationRecord
   belongs_to :user
   has_many :bids
+  has_many :watches
 
   validates :title, presence: true
   validates :details, presence: true, length: {minimum: 10}
@@ -19,4 +20,20 @@ class Auction < ApplicationRecord
   def set_defaults
     self.start_price ||=1
   end
+
+  include AASM
+
+  aasm whiny_transitions: false do
+    state :draft, initial: true
+    state :published, :reserve_met
+
+    event :publish do
+      transitions from: :draft, to: :published
+    end
+
+    event :reserve_meet do
+      transitions from: :published, to: :reserve_met
+    end
+  end
+
 end

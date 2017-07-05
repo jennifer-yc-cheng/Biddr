@@ -13,8 +13,14 @@
       <%= link_to('Home', home_path) %>
       |
       <%= link_to('All Auctions', auctions_path) %>
+      <% if user_signed_in? %>
+      |
+      <%= link_to('All Bidded Auctions', bidded_auctions_path) %>
+      |
+      <%= link_to('My Watched Auctions', watched_auctions_path) %>
       |
       <%= link_to 'New Auction', new_auction_path %>
+      <% end %>
 
       <% if user_signed_in? %>
         <div class="pull-right">

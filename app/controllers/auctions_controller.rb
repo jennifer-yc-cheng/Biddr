@@ -23,10 +23,15 @@ class AuctionsController < ApplicationController
 
   def show
     @bid = Bid.new
+    @watch = @auction.watches.find_by(user: current_user)
   end
 
   def bidded
     @auctions = Auction.where(is_bidded: true)
+  end
+
+  def watched
+    @watches = current_user.watches
   end
 
   private

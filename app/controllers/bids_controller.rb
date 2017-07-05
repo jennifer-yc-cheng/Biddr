@@ -6,6 +6,9 @@ class BidsController < ApplicationController
     @bid.auction = @auction
     if @bid.save
       @auction.update(is_bidded: true)
+      if(@bid.price >= @auction.reserve_price)
+        @auction.reserve_meet!
+      end
       redirect_to auction_path(@auction)
     else
       render 'auctions/show'
